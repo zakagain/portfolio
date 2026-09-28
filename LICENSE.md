@@ -1,10 +1,10 @@
-Copyright (c) 2026
+# Copyright Zakariya Khalid (c) 2026
 
-All Rights Reserved.
+## All Rights Reserved.
 
 The source code, design, visual elements, graphics, media, and written content contained in this repository and portfolio website are the exclusive property of the copyright holder.
 
-Permission is strictly prohibited to:
+Permission is **strictly prohibited** to:
 
 - Copy, reproduce, modify, publish, distribute, or create derivative works from any part of this project.
 - Host, deploy, or re-use the codebase, design, or content for personal, commercial, or non-commercial purposes.
