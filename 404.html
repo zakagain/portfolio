@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting…</title>
+    <script>
+      // GitHub Pages serves this file for any path it cannot resolve, but the
+      // browser's location stays on the requested path (e.g. /work). So the
+      // path is handed to the app as a query param and the browser is sent to
+      // the site root, where index.html restores the clean URL before React
+      // mounts. The path is stashed absolute, so it is correct at any base.
+      ;(function () {
+        var path = location.pathname + location.search + location.hash
+
+        try {
+          location.replace('%BASE_URL%?redirect=' + encodeURIComponent(path))
+        } catch (error) {
+          location.replace('%BASE_URL%')
+        }
+      })()
+    </script>
+  </head>
+  <body>
+    <p>Redirecting…</p>
+  </body>
+</html>

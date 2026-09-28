@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>Zakariya Khalid — Software Engineer</title>
+    <meta
+      name="description"
+      content="Portfolio of Zakariya Khalid, a software engineer building things for the web."
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Zakariya Khalid — Software Engineer" />
+    <meta
+      property="og:description"
+      content="Portfolio of Zakariya Khalid, a software engineer building things for the web."
+    />
+    <meta name="twitter:card" content="summary" />
+
+    <script>
+      // Set the theme before first paint so there is no flash of the wrong one.
+      // Follows the OS preference unless the visitor has used the toggle.
+      // Keep this in sync with readInitialTheme() in src/hooks/useTheme.ts.
+      try {
+        var stored = localStorage.getItem('theme')
+        if (stored !== 'light' && stored !== 'dark') {
+          stored = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        }
+        document.documentElement.dataset.theme = stored
+      } catch (error) {
+        document.documentElement.dataset.theme = 'light'
+      }
+
+      // GitHub Pages routes unknown paths to 404.html, which redirects here
+      // with the requested path in ?redirect=. Restore the clean URL so the
+      // router sees /work rather than /. The path is absolute, so this works
+      // unchanged at a root domain or under /repo/.
+      try {
+        var params = new URLSearchParams(location.search)
+        var redirect = params.get('redirect')
+
+        if (redirect && /^\/(?!\/)/.test(redirect)) {
+          params.delete('redirect')
+          var rest = params.toString()
+          history.replaceState(
+            null,
+            '',
+            redirect + (rest ? '?' + rest : '') + location.hash,
+          )
+        }
+      } catch (error) {
+        /* Nothing to restore. */
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

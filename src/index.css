@@ -1,0 +1,946 @@
+/* ==========================================================================
+   Portfolio styles
+   --------------------------------------------------------------------------
+   1. Design tokens (change these first — the whole site re-themes from here)
+   2. Base + layout primitives
+   3. Components (nav, hero, cards, timeline, contact, footer)
+   4. Responsive tweaks
+   ========================================================================== */
+
+/* 1. Design tokens ======================================================== */
+
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f6f7f9;
+  --bg-elevated: #ffffff;
+  --text: #16181d;
+  --text-muted: #5c6370;
+  --border: #e3e6ea;
+  --accent: #3057e0;
+  --accent-soft: #3057e01a;
+  --accent-contrast: #ffffff;
+  --success: #1a7f4b;
+  --warning: #9a6200;
+  --grid-line: #dfe3e9;
+  --shadow: 0 1px 2px rgb(16 24 40 / 6%), 0 8px 24px rgb(16 24 40 / 6%);
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --container: 68rem;
+  --nav-height: 4rem;
+
+  /* Origin of the theme wipe, set by useTheme from the button's position. */
+  --wipe-x: 100%;
+  --wipe-y: 0px;
+
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0d0f13;
+  --bg-soft: #13161c;
+  --bg-elevated: #161a21;
+  --text: #e8eaee;
+  --text-muted: #9aa3b1;
+  --border: #262b34;
+  --accent: #7b93ff;
+  --accent-soft: #7b93ff1f;
+  --accent-contrast: #0d0f13;
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --grid-line: #1c212a;
+  --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 8px 24px rgb(0 0 0 / 30%);
+
+  color-scheme: dark;
+}
+
+/* 2. Base + layout primitives ============================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + 1rem);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Layout shell: keeps the footer at the bottom when a page is short. */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0;
+}
+
+ul,
+ol,
+dl,
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/* Visually hidden, still announced by screen readers. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: 0.75rem 1rem;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+/* Grid backdrop
+   --------------------------------------------------------------------------
+   A fixed layer behind all content. On load, `--reveal` animates from 0% to
+   125%, widening an opaque wedge from the top-right corner towards the
+   bottom-left. `@property` is required so the percentage can interpolate.
+   -------------------------------------------------------------------------- */
+
+@property --reveal {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 125%;
+}
+
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 3rem 3rem;
+  /* Opaque at the start of the gradient (top-right), fading out bottom-left. */
+  -webkit-mask-image: linear-gradient(
+    to bottom left,
+    #000 var(--reveal),
+    transparent calc(var(--reveal) + 25%)
+  );
+  mask-image: linear-gradient(
+    to bottom left,
+    #000 var(--reveal),
+    transparent calc(var(--reveal) + 25%)
+  );
+  animation: grid-reveal 2.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes grid-reveal {
+  from {
+    --reveal: 0%;
+  }
+
+  to {
+    --reveal: 125%;
+  }
+}
+
+/* Everything above the backdrop. */
+.nav,
+.page,
+.footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* Page
+   --------------------------------------------------------------------------
+   `.page` is the <main> wrapper for a single route; each page supplies its own
+   `.container`.
+   -------------------------------------------------------------------------- */
+
+.page {
+  flex: 1 0 auto;
+  padding-block: 3.5rem 4.5rem;
+}
+
+.page--centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 6rem;
+  text-align: center;
+}
+
+.page-header {
+  margin-bottom: 2.5rem;
+}
+
+.page-header__title {
+  font-size: 1.5rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.page-header__title::before {
+  content: '## ';
+  color: var(--accent);
+}
+
+.page-header__lede {
+  margin-top: 0.75rem;
+  color: var(--text-muted);
+  max-width: 52ch;
+}
+
+
+/* Shared bits */
+
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1.15rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  color: var(--text);
+  font: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+
+.button:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.button--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tags li {
+  padding: 0.15rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-soft);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+}
+
+.badge {
+  display: inline-block;
+  flex: none;
+  white-space: nowrap;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  background: var(--bg-soft);
+  color: var(--text-muted);
+}
+
+.badge--live {
+  background: color-mix(in srgb, var(--success) 14%, transparent);
+  color: var(--success);
+}
+
+.badge--in-progress {
+  background: color-mix(in srgb, var(--warning) 16%, transparent);
+  color: var(--warning);
+}
+
+/* Theme toggle — pinned to the very right of the bar */
+
+.theme-toggle {
+  /* Pushed to the far edge; the section links stay beside the Home entry. */
+  margin-left: auto;
+  display: inline-grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.12s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+}
+
+/* Press feedback. */
+.theme-toggle:active {
+  transform: scale(0.88);
+}
+
+/* Keyed by theme in the markup, so this replays on every swap. */
+.theme-toggle__icon {
+  display: block;
+  font-size: 1rem;
+  line-height: 1;
+  animation: toggle-spin 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+@keyframes toggle-spin {
+  from {
+    transform: rotate(-90deg) scale(0.3);
+    opacity: 0;
+  }
+
+  to {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+/* 3. Components =========================================================== */
+
+/* Nav */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  /* Opaque on purpose: the grid background is a fixed layer behind the whole
+     page, and any translucency here let it show through the bar. */
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav__home {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.nav__home:hover {
+  color: var(--accent);
+}
+
+.nav__inner {
+  min-height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav__menu {
+  /* The <nav> wrapper is the flex item, not the <ul>. Without this it keeps the
+     default `min-width: auto` and refuses to shrink, pushing the toggle off
+     screen on narrow viewports. */
+  min-width: 0;
+}
+
+.nav__links {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.925rem;
+}
+
+.nav__link {
+  display: inline-block;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding-block: 0.35rem;
+  border-bottom: 2px solid transparent;
+}
+
+.nav__link:hover {
+  color: var(--text);
+}
+
+.nav__link--active {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+
+/* Hoverable name
+   --------------------------------------------------------------------------
+   The alternate face is absolutely positioned over the resting one, so a random
+   face can never resize a letter's cell and reflow the name under the cursor.
+
+   Transitions are asymmetric on purpose. Leaving is slow and delayed, so the
+   letter trails the cursor. Entering is nearly a cut: cross-fading two
+   different glyph shapes reads as a double image, so the resting face clears
+   first and the new one fades in just behind it. The lift does the smoothing.
+   -------------------------------------------------------------------------- */
+
+.name {
+  display: inline-block;
+}
+
+.letter {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.28s;
+}
+
+.letter__face {
+  display: block;
+  opacity: 1;
+  transition: opacity 0.36s ease 0.28s;
+}
+
+.letter__face--alt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: var(--letter-font, var(--font-sans));
+  color: var(--accent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.letter:hover {
+  transform: translateY(-0.08em) rotate(-4deg) scale(1.06);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.letter:hover .letter__face--base {
+  opacity: 0;
+  transition: opacity 0.04s linear;
+}
+
+.letter:hover .letter__face--alt {
+  opacity: 1;
+  transition: opacity 0.1s ease-out 0.04s;
+}
+
+/* Hero */
+
+.hero__name {
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  font-weight: 700;
+}
+
+
+.hero__role {
+  margin-top: 0.5rem;
+  font-size: 1.25rem;
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
+.hero__tagline {
+  margin-top: 1.25rem;
+  max-width: 46ch;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.hero__socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+  font-size: 0.9rem;
+}
+
+/* Projects */
+
+.project-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.project:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.project__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.project__title {
+  /* Lets a long title wrap rather than squeezing the status badge. */
+  min-width: 0;
+  font-size: 1.15rem;
+}
+
+.project__summary {
+  color: var(--text);
+}
+
+.project__description {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.project__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* About */
+
+.about {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+}
+
+.about__prose p + p {
+  margin-top: 1rem;
+}
+
+.about__prose p {
+  color: var(--text-muted);
+  max-width: 62ch;
+}
+
+.facts div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.facts div:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.facts dt {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.facts dd {
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.about__currently {
+  margin-top: 2rem;
+}
+
+.about__currently h3 {
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.about__currently li {
+  position: relative;
+  padding-left: 1.1rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.about__currently li::before {
+  content: '·';
+  position: absolute;
+  left: 0.25rem;
+  color: var(--accent);
+}
+
+/* Single flat skill list. Wider cells than the inline `.tags` pills so each
+   entry sits on one line and the block has enough presence to fill the page. */
+.tags--grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 0.75rem;
+}
+
+.tags--grid li {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 1.15rem 1rem;
+  font-size: 0.9rem;
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+}
+
+/* Skills */
+
+.skill-groups {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+
+.skill-group__category {
+  margin-bottom: 0.6rem;
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+/* Experience */
+
+.timeline {
+  display: grid;
+  gap: 2rem;
+}
+
+.timeline__item {
+  display: grid;
+  gap: 0.5rem 2rem;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--border);
+}
+
+.timeline__period {
+  display: flex;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.timeline__role {
+  font-size: 1.1rem;
+}
+
+.timeline__org {
+  color: var(--accent);
+  font-size: 0.95rem;
+}
+
+.timeline__location {
+  color: var(--text-muted);
+}
+
+.timeline__summary {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  max-width: 62ch;
+}
+
+.timeline__highlights {
+  margin-block: 0.75rem;
+  display: grid;
+  gap: 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.timeline__highlights li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.timeline__highlights li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* Contact */
+
+.contact {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+
+.contact__lead {
+  color: var(--text-muted);
+  max-width: 48ch;
+}
+
+.contact__email {
+  margin-top: 0.5rem;
+  font-family: var(--font-mono);
+}
+
+.contact__links {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 28rem;
+}
+
+.contact__links a {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.7rem;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+}
+
+.contact__links a:hover .contact__handle {
+  color: var(--accent);
+}
+
+.contact__label {
+  font-weight: 500;
+}
+
+.contact__handle {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* Footer */
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding-block: 2rem;
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* 404 */
+
+.not-found__code {
+  font-family: var(--font-mono);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.not-found__title {
+  font-size: 1.5rem;
+}
+
+.not-found__lead {
+  color: var(--text-muted);
+  max-width: 44ch;
+  margin-bottom: 1rem;
+}
+
+/* Theme wipe
+   --------------------------------------------------------------------------
+   Uses the View Transitions API: the browser snapshots the outgoing and
+   incoming frames itself, so the new state is revealed as a real snapshot
+   rather than a flat fill. That matters — an opaque overlay cannot repaint the
+   foreground underneath it, which left body text dark-on-dark for the length
+   of the sweep.
+
+   The old frame is held still and the new one is revealed by an expanding
+   circle centred on the button, which sits in the top-right corner.
+   -------------------------------------------------------------------------- */
+
+@keyframes theme-wipe {
+  from {
+    clip-path: circle(0px at var(--wipe-x) var(--wipe-y));
+  }
+
+  to {
+    clip-path: circle(150vmax at var(--wipe-x) var(--wipe-y));
+  }
+}
+
+::view-transition-old(root) {
+  animation: none;
+}
+
+::view-transition-new(root) {
+  animation: theme-wipe 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* 4. Responsive tweaks ==================================================== */
+
+@media (min-width: 72rem) {
+  /* Above this width the 68rem column is centred with slack on both sides, so
+     the toggle can sit slightly outside the text column without ever reaching
+     the viewport edge. Below it there is no slack and the margin is unsafe. */
+  .theme-toggle {
+    margin-right: -1.5rem;
+  }
+}
+
+@media (max-width: 40rem) {
+  .nav__inner {
+    gap: 0.75rem;
+  }
+
+  /* Keep every link reachable on small screens rather than dropping them.
+     `min-width: 0` lets the list shrink and scroll so the toggle stays put.
+     The vertical padding/negative margin give focus rings room inside the
+     scroll container, which otherwise clips them. */
+  .nav__links {
+    gap: 0.9rem;
+    font-size: 0.85rem;
+    min-width: 0;
+    padding-block: 0.35rem;
+    margin-block: -0.35rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav__links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .page {
+    padding-block: 2.5rem 3rem;
+  }
+
+  .about {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .timeline__item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Show the grid fully formed instead of wiping it in. */
+  .grid-bg {
+    animation: none;
+  }
+
+  .theme-toggle__icon {
+    animation: none;
+  }
+
+  /* Keep the font swap, drop the movement. */
+  .letter {
+    transition: none;
+  }
+
+  .letter:hover {
+    transform: none;
+    transition: none;
+  }
+}
