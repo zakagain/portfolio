@@ -22,6 +22,11 @@
   --success: #1a7f4b;
   --warning: #9a6200;
   --grid-line: #dfe3e9;
+
+  /* Chromatic-aberration glitch on the 404. */
+  --glitch-cyan: #00e0ff;
+  --glitch-pink: #ff2e88;
+  --glitch-green: #3dffa0;
   --shadow: 0 1px 2px rgb(16 24 40 / 6%), 0 8px 24px rgb(16 24 40 / 6%);
 
   --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
@@ -816,22 +821,175 @@ a:hover {
 
 /* 404 */
 
+/* 404
+   --------------------------------------------------------------------------
+   The glitch itself is not in CSS: `useGlitch` generates a random burst per run
+   and animates these layers with the Web Animations API. Here they are just
+   positioned — cyan splitting one way, pink the other, with the core on top.
+   -------------------------------------------------------------------------- */
+
+@keyframes not-found-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes not-found-split {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+
+  8% {
+    opacity: 0.95;
+    transform: translate(calc(var(--split) * 2.2), 1px);
+  }
+
+  20% {
+    opacity: 0.95;
+    transform: translate(calc(var(--split) * -1.1), -1px);
+  }
+
+  32% {
+    opacity: 0.95;
+    transform: translate(calc(var(--split) * 1.7), 1px);
+  }
+
+  44% {
+    opacity: 0.95;
+    transform: translate(calc(var(--split) * -2), 0);
+  }
+
+  56% {
+    opacity: 0.9;
+    transform: translate(calc(var(--split) * 1.2), -1px);
+  }
+
+  68% {
+    opacity: 0.95;
+    transform: translate(calc(var(--split) * -1.5), 1px);
+  }
+
+  80% {
+    opacity: 0.9;
+    transform: translate(calc(var(--split) * 1.8), 0);
+  }
+
+  92% {
+    opacity: 0.55;
+    transform: translate(calc(var(--split) * -0.8), 0);
+  }
+}
+
+@keyframes not-found-core {
+  0%,
+  100% {
+    color: var(--text);
+  }
+
+  10%,
+  36%,
+  62% {
+    color: var(--glitch-flash);
+  }
+
+  22%,
+  50%,
+  78% {
+    color: var(--text);
+  }
+}
+
 .not-found__code {
+  position: relative;
+  display: inline-block;
   font-family: var(--font-mono);
-  font-size: 3rem;
+  font-size: clamp(3.5rem, 12vw, 5.5rem);
   font-weight: 700;
-  color: var(--accent);
   line-height: 1;
+  /* Per-burst values, overwritten by useGlitch each time it fires. */
+  --glitch-dur: 420ms;
+  --glitch-a: 6px;
+  --glitch-b: 6px;
+  --glitch-flash: #3dffa0;
+  --glitch-play: 1;
+  animation: not-found-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.not-found__code-core {
+  display: block;
+}
+
+.not-found__code-ghost {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.not-found__code-ghost--cyan {
+  --split: calc(0px - var(--glitch-a));
+  color: var(--glitch-cyan);
+}
+
+.not-found__code-ghost--pink {
+  --split: var(--glitch-b);
+  color: var(--glitch-pink);
+}
+
+/* Only animating while a burst is active, so the code sits still otherwise.
+   No fill mode on purpose: a burst that gets cut short part-way through must
+   snap back to rest rather than hold its last, visible frame. */
+.not-found__code[data-glitch='on'] .not-found__code-ghost {
+  animation: not-found-split var(--glitch-dur) steps(1, end) var(--glitch-play);
+}
+
+.not-found__code[data-glitch='on'] .not-found__code-core {
+  animation: not-found-core var(--glitch-dur) steps(1, end) var(--glitch-play);
 }
 
 .not-found__title {
   font-size: 1.5rem;
+  animation: not-found-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.06s both;
 }
 
 .not-found__lead {
   color: var(--text-muted);
   max-width: 44ch;
-  margin-bottom: 1rem;
+  animation: not-found-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+
+.not-found__log {
+  margin: 0.5rem 0;
+  padding: 0.9rem 1.1rem;
+  max-width: 34rem;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.7;
+  text-align: left;
+  overflow-x: auto;
+  animation: not-found-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+}
+
+.not-found__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  animation: not-found-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both;
 }
 
 /* Theme wipe
