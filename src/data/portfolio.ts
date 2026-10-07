@@ -100,8 +100,10 @@ export const projects: Project[] = [
     title: 'Mac Space Period',
     tech: ['AutoHotkey v2'],
     status: 'live',
-    // No live site for this one.
-    links: [{ label: 'Source', href: 'https://github.com/zakagain/MSP', external: true }],
+    links: [
+      { label: 'Live site', href: 'https://msp.zakariyakhalid.dpdns.org', external: true },
+      { label: 'Source', href: 'https://github.com/zakagain/MSP', external: true },
+    ],
   },
   {
     id: 'finance-app',
