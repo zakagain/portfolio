@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zakariyakhalid.dpdns.org/sitemap.xml
