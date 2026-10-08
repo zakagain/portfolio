@@ -70,7 +70,7 @@ export const navLinks = [
 export const about = {
   heading: 'About',
   paragraphs: [
-    "Hi, I'm Zak. Nice to meet you. I enjoy films, TV and videogames. I also like development, as you can see. I really don't know what else to put here, so this is it for now. ",
+    "Hi, I'm Zak. Nice to meet you. I enjoy films, TV and video games. I also like development, as you can see. I really don't know what else to put here, so this is it for now. *Subject to change ",
   ],
   facts: [
     { label: 'Based in', value: profile.location },
