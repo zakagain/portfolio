@@ -11,7 +11,7 @@ export function Footer() {
           © {year} {profile.name}. All rights reserved.
         </p>
         <p className="footer__meta">
-          Built with React + Vite. <Link to="/">Home ↑</Link>
+          <Link to="/">Home ↑</Link>
         </p>
       </div>
     </footer>

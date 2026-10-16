@@ -7,7 +7,10 @@ type PageHeaderProps = {
   lede?: string
 }
 
-/** Heading block at the top of a standalone page. */
+/**
+ * Heading block at the top of a standalone page: the title, then an optional
+ * blurb.
+ */
 export function PageHeader({ title, lede }: PageHeaderProps) {
   return (
     <header className="page-header">

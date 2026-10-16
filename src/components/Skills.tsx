@@ -5,8 +5,8 @@ import { PageHeader } from './PageHeader'
 export function Skills() {
   usePageMeta('Skills')
 
-  // With one group the category heading would just repeat the page title, and a
-  // lone column of tags leaves the page looking empty. Lay it out as a grid.
+  // With one group the category heading would just repeat the page title, so
+  // the items are laid out as a single cloud instead.
   const isSingleGroup = skills.length === 1
 
   return (
@@ -14,7 +14,7 @@ export function Skills() {
       <PageHeader title="Skills" lede="Tools I kinda sorta know how to use" />
 
       {isSingleGroup ? (
-        <ul className="tags tags--grid">
+        <ul className="tags skills-cloud">
           {skills[0].items.map((item) => (
             <li key={item}>{item}</li>
           ))}

@@ -13,13 +13,11 @@ export function Experience() {
         {experience.map((item) => (
           <li key={`${item.organisation}-${item.start}`} className="timeline__item">
             <p className="timeline__period">
-              <span>{item.start}</span>
-              <span aria-hidden="true">—</span>
-              <span>{item.end ?? 'Present'}</span>
+              {item.start} — {item.end ?? 'Present'}
             </p>
 
             <div className="timeline__body">
-              <h2 className="timeline__role">{item.role}</h2>
+              <h2>{item.role}</h2>
               <p className="timeline__org">
                 {item.organisation}
                 {item.location ? <span className="timeline__location"> · {item.location}</span> : null}

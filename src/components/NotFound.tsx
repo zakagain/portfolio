@@ -17,7 +17,7 @@ export function NotFound() {
   const glitchRef = useGlitch<HTMLParagraphElement>()
 
   return (
-    <div className="container page page--centered">
+    <div className="container not-found">
       {/* The ghost layers are decorative duplicates of the code, driven by
           `useGlitch`; only the core span is announced. */}
       <p className="not-found__code" ref={glitchRef}>

@@ -29,6 +29,11 @@ export function Projects() {
               <h2 className="project__title">{project.title}</h2>
               {project.status ? (
                 <span className={`badge badge--${project.status}`}>
+                  {/* Only the live badge carries a dot; it is the one state
+                      worth reading at a glance from across the grid. */}
+                  {project.status === 'live' ? (
+                    <span className="badge__dot" aria-hidden="true" />
+                  ) : null}
                   {statusLabels[project.status]}
                 </span>
               ) : null}
@@ -54,7 +59,8 @@ export function Projects() {
                     target={link.external ? '_blank' : undefined}
                     rel="noreferrer"
                   >
-                    {link.label} ↗
+                    {link.label}
+                    <span className="arr" aria-hidden="true">↗</span>
                   </a>
                 ))}
               </div>

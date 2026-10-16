@@ -16,7 +16,7 @@ export function About() {
           ))}
         </div>
 
-        <aside className="about__aside">
+        <aside className="about__side">
           <dl className="facts">
             {about.facts.map((fact) => (
               <div key={fact.label}>

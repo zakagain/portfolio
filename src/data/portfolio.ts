@@ -164,3 +164,20 @@ export const skills: SkillGroup[] = [
     ],
   },
 ]
+
+/** Year the company was founded, taken from the earliest experience entry. */
+const foundedYear = experience[0]?.start ?? '2025'
+
+/**
+ * Headline numbers in the hero band. The project count is derived from
+ * `projects` and the year from `experience`, so neither can drift out of step
+ * with the rest of the page.
+ */
+export const metrics = [
+  {
+    value: String(projects.filter((project) => project.status === 'live').length).padStart(2, '0'),
+    label: 'live projects',
+  },
+  { value: '∞', label: 'random stuff, hoping it works' },
+  { value: foundedYear, label: 'founded Vectura One' },
+]

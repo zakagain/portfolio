@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { navLinks } from '../data/portfolio'
+import { navLinks, profile } from '../data/portfolio'
 import { ThemeToggle } from './ThemeToggle'
 
 type NavProps = {
@@ -11,9 +11,10 @@ export function Nav({ theme, onToggleTheme }: NavProps) {
   return (
     <header className="nav">
       <div className="container nav__inner">
-        {/* `end` keeps this active only on the home route. */}
-        <NavLink className="nav__home" to="/" end>
-          Home
+        {/* The brand doubles as the way home, so it is the name rather than a
+            "Home" label. `end` keeps it active only on the home route. */}
+        <NavLink className="nav__brand" to="/" end>
+          {profile.name}
         </NavLink>
 
         <nav className="nav__menu" aria-label="Main">

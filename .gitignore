@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Source design mockup this site's styling was built from. Reference only — the
+# implemented design lives in src/index.css, so the generated file is not
+# versioned.
+design.html
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
