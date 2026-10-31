@@ -30,5 +30,9 @@ export function usePageMeta(title?: string) {
       document.head.appendChild(ogUrl)
     }
     ogUrl.content = canonicalUrl
+
+    // The home page's <h1> is the static one in index.html; inner routes render
+    // their own, so hide the static one to keep a single <h1> per document.
+    document.documentElement.toggleAttribute('data-inner-page', Boolean(title))
   }, [title])
 }

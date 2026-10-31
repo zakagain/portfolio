@@ -8,9 +8,9 @@ export function Hero() {
 
   return (
     <div className="container hero">
-      <h1 className="hero__name">
+      <div className="hero__name">
         <NameLetters name={profile.name} />
-      </h1>
+      </div>
       <p className="hero__role">{profile.role}</p>
       <p className="hero__tagline">{profile.tagline}</p>
 

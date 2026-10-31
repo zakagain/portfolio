@@ -749,6 +749,14 @@ a:hover {
 .hero__name {
   max-width: 18ch;
   font-size: clamp(2.5rem, 6vw, var(--text-4xl));
+  /* Carries over the h1 defaults now that the hero name is a plain div, so it
+     looks identical while the static <h1> in index.html stays canonical. */
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  overflow-wrap: anywhere;
+  color: var(--fg);
 }
 
 .hero__role {
