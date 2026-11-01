@@ -8,11 +8,10 @@ export function Hero() {
 
   return (
     <div className="container hero">
-      <h1 className="hero__name" aria-label={profile.name}>
-        <span aria-hidden="true">
-          <NameLetters name={profile.name} />
-        </span>
-      </h1>
+      <h1 className="seo-h1">{profile.name}</h1>
+      <div className="hero__name" aria-hidden="true">
+        <NameLetters name={profile.name} />
+      </div>
       <p className="hero__role">{profile.role}</p>
       <p className="hero__tagline">{profile.tagline}</p>
 
