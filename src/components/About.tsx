@@ -3,7 +3,7 @@ import { usePageMeta } from '../hooks/usePageMeta'
 import { PageHeader } from './PageHeader'
 
 export function About() {
-  usePageMeta(about.heading)
+  usePageMeta(about.heading, 'About Zakariya Khalid, software engineer and founder of Vectura One Inc.')
 
   return (
     <div className="container">

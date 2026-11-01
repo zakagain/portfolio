@@ -749,8 +749,8 @@ a:hover {
 .hero__name {
   max-width: 18ch;
   font-size: clamp(2.5rem, 6vw, var(--text-4xl));
-  /* Carries over the h1 defaults now that the hero name is a plain div, so it
-     looks identical while the static <h1> in index.html stays canonical. */
+  /* The hero name is now the page's real <h1>, so it inherits the base h1
+     rules above; only the responsive size differs. */
   font-family: var(--font-display);
   font-weight: 600;
   line-height: var(--leading-tight);

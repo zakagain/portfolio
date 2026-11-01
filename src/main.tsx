@@ -1,5 +1,5 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
 // Self-hosted so the fonts are same-origin and cached with the bundle. Loaded
@@ -14,10 +14,18 @@ if (!container) {
   throw new Error('Root element #root not found')
 }
 
-createRoot(container).render(
+const app = (
   <StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 )
+
+// In production the routes are prerendered into #root, so hydrate instead of
+// re-rendering from scratch (avoids a flash and keeps the SSR HTML).
+if (container.hasChildNodes()) {
+  hydrateRoot(container, app)
+} else {
+  createRoot(container).render(app)
+}

@@ -60,14 +60,16 @@ export function NameLetters({ name, className }: NameLettersProps) {
   return (
     <span className={className ? `name ${className}` : 'name'}>
       <span className="sr-only">{name}</span>
-      {words.map((word, w) => (
-        <span key={word}>
-          {Array.from(word).map((char, i) => (
-            <Letter key={`${char}-${i}`} char={char} />
-          ))}
-          {w < words.length - 1 ? ' ' : null}
-        </span>
-      ))}
+      <span aria-hidden="true">
+        {words.map((word, w) => (
+          <span key={word}>
+            {Array.from(word).map((char, i) => (
+              <Letter key={`${char}-${i}`} char={char} />
+            ))}
+            {w < words.length - 1 ? ' ' : null}
+          </span>
+        ))}
+      </span>
     </span>
   )
 }

@@ -1,0 +1,2 @@
+# SPA fallback for Netlify / Cloudflare Pages: serve index.html for all routes with 200.
+/*    /index.html   200

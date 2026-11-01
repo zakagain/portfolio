@@ -10,7 +10,7 @@ const statusLabels: Record<NonNullable<Project['status']>, string> = {
 }
 
 export function Projects() {
-  usePageMeta('Work')
+  usePageMeta('Work', 'Selected projects by Zakariya Khalid — web apps, tools, and experiments.')
 
   // Featured projects float to the top; everything else keeps its original order.
   const ordered = [...projects].sort((a, b) => Number(b.featured ?? false) - Number(a.featured ?? false))

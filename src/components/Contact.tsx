@@ -3,7 +3,7 @@ import { usePageMeta } from '../hooks/usePageMeta'
 import { PageHeader } from './PageHeader'
 
 export function Contact() {
-  usePageMeta('Contact')
+  usePageMeta('Contact', 'Get in touch with Zakariya Khalid.')
 
   return (
     <div className="container">

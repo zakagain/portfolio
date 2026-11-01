@@ -4,13 +4,13 @@ import { usePageMeta } from '../hooks/usePageMeta'
 import { NameLetters } from './NameLetters'
 
 export function Hero() {
-  usePageMeta()
+  usePageMeta(undefined, 'Portfolio of Zakariya Khalid, a software engineer building things for the web.')
 
   return (
     <div className="container hero">
-      <div className="hero__name">
+      <h1 className="hero__name">
         <NameLetters name={profile.name} />
-      </div>
+      </h1>
       <p className="hero__role">{profile.role}</p>
       <p className="hero__tagline">{profile.tagline}</p>
 

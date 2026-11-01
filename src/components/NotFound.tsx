@@ -13,7 +13,7 @@ const errorLog = [
 const notFoundCode = '404'
 
 export function NotFound() {
-  usePageMeta('Page not found')
+  usePageMeta('Page not found', 'The requested page could not be found.')
   const glitchRef = useGlitch<HTMLParagraphElement>()
 
   return (

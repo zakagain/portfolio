@@ -3,7 +3,7 @@ import { usePageMeta } from '../hooks/usePageMeta'
 import { PageHeader } from './PageHeader'
 
 export function Skills() {
-  usePageMeta('Skills')
+  usePageMeta('Skills', 'Skills and tools Zakariya Khalid uses for web development.')
 
   // With one group the category heading would just repeat the page title, so
   // the items are laid out as a single cloud instead.

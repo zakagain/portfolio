@@ -115,6 +115,13 @@ restores the clean URL before React mounts. `404.html` is a real Vite entry, so
 `%BASE_URL%` is substituted at build time and the same file works unchanged at a
 root domain or under `/repo/`.
 
+`npm run build` also prerenders every route to static HTML (via `dist-ssr/`)
+and hydrates it on load, so crawlers get full content in the first byte. On
+GitHub Pages those prerendered files are only served for trailing-slash URLs
+(`/work/`); for clean `/work` links to return HTTP 200, deploy to a host with
+SPA rewrites (Netlify, Vercel, Cloudflare Pages — config files `_redirects`,
+`vercel.json` are included) instead of GitHub Pages.
+
 Two things to check once:
 
 - `vite.config.ts` has `base: '/'`, correct for your custom domain. If you ever

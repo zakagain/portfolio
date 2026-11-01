@@ -1,0 +1,10 @@
+{
+  "name": "Zakariya Khalid",
+  "short_name": "Zakariya",
+  "description": "Portfolio of Zakariya Khalid, a software engineer building things for the web.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0d10",
+  "theme_color": "#3dffa0",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
