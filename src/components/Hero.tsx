@@ -8,11 +8,14 @@ export function Hero() {
 
   return (
     <div className="container hero">
-      <h1 className="hero__name">
-        <NameLetters name={profile.name} />
+      <h1 className="hero__name" aria-label={profile.name}>
+        <span aria-hidden="true">
+          <NameLetters name={profile.name} />
+        </span>
       </h1>
       <p className="hero__role">{profile.role}</p>
       <p className="hero__tagline">{profile.tagline}</p>
+
 
       <div className="hero__actions">
         <Link className="button button--primary" to="/work">
