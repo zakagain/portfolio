@@ -14,9 +14,9 @@ const DEFAULT_DESCRIPTION = 'Portfolio of Zakariya Khalid, a software engineer b
 const ROUTES = [
   { path: '/', title: null, description: DEFAULT_DESCRIPTION },
   { path: '/work', title: 'Work', description: 'Selected projects by Zakariya Khalid — web apps, tools, and experiments.' },
-  { path: '/about', title: 'About', description: 'About Zakariya Khalid, software engineer and founder of Vectura One Inc.' },
+  { path: '/about', title: 'About', description: 'About Zakariya Khalid, software engineer.' },
   { path: '/skills', title: 'Skills', description: 'Skills and tools Zakariya Khalid uses for web development.' },
-  { path: '/experience', title: 'Experience', description: 'Work experience of Zakariya Khalid, founder and CEO of Vectura One Inc.' },
+  { path: '/experience', title: 'Experience', description: 'Work experience of Zakariya Khalid, COO at Orca Systems.' },
   { path: '/contact', title: 'Contact', description: 'Get in touch with Zakariya Khalid.' },
 ]
 
@@ -30,7 +30,7 @@ function escapeHtml(s) {
 
 for (const route of ROUTES) {
   const html = render(route.path)
-  const pageTitle = route.title ? `${route.title} — ${SITE_NAME}` : `${SITE_NAME} — President and CEO of Vectura One Inc.`
+  const pageTitle = route.title ? `${route.title} — ${SITE_NAME}` : `${SITE_NAME} — COO, Orca Systems`
   // Note: role comes from portfolio; hardcoded to match profile.role
   const pageDesc = route.description
 

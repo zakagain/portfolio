@@ -42,7 +42,6 @@ export type SocialLink = Link & {
 export const profile = {
   name: 'Zakariya Khalid',
   role: 'Cheif Operating Officer at Orca Systems',
-  tagline: "I'm Zak, and here's my super professional portfolio!",
   location: 'United Kingdom',
   email: 'hello@zakariyakhalid.com',
   resumeUrl: '/resume.pdf',
@@ -127,15 +126,7 @@ export const projects: Project[] = [
   },
 ]
 
-export const experience: Experience[] = [
-  {
-    role: 'Founder, President and CEO',
-    organisation: 'Vectura One Inc.',
-    start: '2025',
-    summary:
-      'Founded and lead Vectura One Inc., setting its direction and overseeing day-to-day operations and growth.',
-  },
-]
+export const experience: Experience[] = []
 
 /**
  * One flat list rather than separate categories. Every language used across the
@@ -165,13 +156,9 @@ export const skills: SkillGroup[] = [
   },
 ]
 
-/** Year the company was founded, taken from the earliest experience entry. */
-const foundedYear = experience[0]?.start ?? '2025'
-
 /**
  * Headline numbers in the hero band. The project count is derived from
- * `projects` and the year from `experience`, so neither can drift out of step
- * with the rest of the page.
+ * `projects`, so it cannot drift out of step with the rest of the page.
  */
 export const metrics = [
   {
@@ -179,5 +166,5 @@ export const metrics = [
     label: 'live projects',
   },
   { value: '∞', label: 'random stuff, hoping it works' },
-  { value: foundedYear, label: 'founded Vectura One' },
+  { value: '2026', label: 'Joined Orca Systems' },
 ]

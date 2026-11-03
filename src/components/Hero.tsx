@@ -13,7 +13,6 @@ export function Hero() {
         <NameLetters name={profile.name} />
       </div>
       <p className="hero__role">{profile.role}</p>
-      <p className="hero__tagline">{profile.tagline}</p>
 
 
       <div className="hero__actions">

@@ -3,7 +3,7 @@ import { usePageMeta } from '../hooks/usePageMeta'
 import { PageHeader } from './PageHeader'
 
 export function Experience() {
-  usePageMeta('Experience', 'Work experience of Zakariya Khalid, founder and CEO of Vectura One Inc.')
+  usePageMeta('Experience', 'Work experience of Zakariya Khalid, COO at Orca Systems.')
 
   return (
     <div className="container">
