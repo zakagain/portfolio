@@ -41,8 +41,8 @@ export type SocialLink = Link & {
 
 export const profile = {
   name: 'Zakariya Khalid',
-  role: 'President and CEO of Vectura One Inc.',
-  tagline: 'I'm Zak, and here's my super professional portfolio!',
+  role: 'Cheif Operating Officer at Orca Systems',
+  tagline: "I'm Zak, and here's my super professional portfolio!",
   location: 'United Kingdom',
   email: 'hello@zakariyakhalid.com',
   resumeUrl: '/resume.pdf',
