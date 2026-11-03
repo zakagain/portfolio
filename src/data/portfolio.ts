@@ -44,7 +44,7 @@ export const profile = {
   role: 'President and CEO of Vectura One Inc.',
   tagline: 'I do random stuff and hope it works',
   location: 'United Kingdom',
-  email: 'hello@zakariyakhalid.dpdns.org',
+  email: 'hello@zakariyakhalid.com',
   resumeUrl: '/resume.pdf',
 } as const
 
@@ -91,7 +91,7 @@ export const projects: Project[] = [
     tech: ['TypeScript', 'JavaScript'],
     status: 'live',
     links: [
-      { label: 'Live site', href: 'https://config-journal.zakariyakhalid.dpdns.org', external: true },
+      { label: 'Live site', href: 'https://config-journal.zakariyakhalid.com', external: true },
       { label: 'Source', href: 'https://github.com/zakagain/config-journal', external: true },
     ],
   },
@@ -101,7 +101,7 @@ export const projects: Project[] = [
     tech: ['AutoHotkey v2'],
     status: 'live',
     links: [
-      { label: 'Live site', href: 'https://msp.zakariyakhalid.dpdns.org', external: true },
+      { label: 'Live site', href: 'https://msp.zakariyakhalid.com', external: true },
       { label: 'Source', href: 'https://github.com/zakagain/MSP', external: true },
     ],
   },

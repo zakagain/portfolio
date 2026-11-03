@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { profile } from '../data/portfolio'
 
-const SITE_URL = 'https://zakariyakhalid.dpdns.org'
+const SITE_URL = 'https://zakariyakhalid.com'
 const SITE_NAME = profile.name
 
 const DEFAULT_DESCRIPTION = 'Portfolio of Zakariya Khalid, a software engineer building things for the web.'
