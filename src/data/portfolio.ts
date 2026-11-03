@@ -22,6 +22,8 @@ export type Experience = {
   role: string
   organisation: string
   location?: string
+  /** Optional link (e.g. the organisation's site). Opens in a new tab when external. */
+  link?: Link
   start: string
   /** Omit for a role that is still current. */
   end?: string
@@ -126,7 +128,20 @@ export const projects: Project[] = [
   },
 ]
 
-export const experience: Experience[] = []
+export const experience: Experience[] = [
+  {
+    role: 'Chief Operating Officer',
+    organisation: 'Orca Servers',
+    link: {
+      label: 'Orca Servers',
+      href: 'https://orcaservers.com/?utm_source=zakariyakhalid.com',
+      external: true,
+    },
+    start: '2026',
+    summary:
+      'Early stages. Joined Orca Servers (https://orcaservers.com) as Chief Operating Officer.',
+  },
+]
 
 /**
  * One flat list rather than separate categories. Every language used across the
