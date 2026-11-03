@@ -71,7 +71,7 @@ export const navLinks = [
 export const about = {
   heading: 'About',
   paragraphs: [
-    "Hi, I'm Zak. Nice to meet you. I enjoy films, TV and video games. I also like development, as you can see. I really don't know what else to put here, so this is it for now. *Subject to change ",
+    "I'm Zak, a developer based in the UK with a strong focus on web development and self-hosted infrastructure. I enjoy building clean, functional tools and exploring how systems work from the code up. ",
   ],
   facts: [
     { label: 'Based in', value: profile.location },
