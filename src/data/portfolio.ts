@@ -43,7 +43,7 @@ export type SocialLink = Link & {
 
 export const profile = {
   name: 'Zakariya Khalid',
-  role: 'Cheif Operating Officer at Orca Systems',
+  role: 'Chief Operating Officer at Orca Systems',
   location: 'United Kingdom',
   email: 'hello@zakariyakhalid.com',
   resumeUrl: '/resume.pdf',
