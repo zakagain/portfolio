@@ -103,7 +103,7 @@ export const projects: Project[] = [
     tech: ['TypeScript', 'JavaScript'],
     status: 'live',
     links: [
-      { label: 'Live site', href: 'https://config-journal.zak.is-a.dev', external: true },
+      { label: 'Live site', href: 'https://config-journal.zakariyakhalid.com', external: true },
       { label: 'Source', href: 'https://github.com/zakagain/config-journal', external: true },
     ],
   },
@@ -113,7 +113,7 @@ export const projects: Project[] = [
     tech: ['AutoHotkey v2'],
     status: 'live',
     links: [
-      { label: 'Live site', href: 'https://msp.zak.is-a.dev', external: true },
+      { label: 'Live site', href: 'https://msp.zakariyakhalid.com', external: true },
       { label: 'Source', href: 'https://github.com/zakagain/MSP', external: true },
     ],
   },
@@ -145,7 +145,7 @@ export const experience: Experience[] = [
     organisation: 'Orca Systems',
     link: {
       label: 'Orca Servers',
-      href: 'https://orcaservers.com/?utm_source=zak.is-a.dev',
+      href: 'https://orcaservers.com/?utm_source=zakariyakhalid.com',
       external: true,
     },
     start: '2026',

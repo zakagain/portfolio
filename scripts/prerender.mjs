@@ -7,7 +7,7 @@ const ROOT = resolve(process.cwd())
 const DIST = join(ROOT, 'dist')
 const SSR = join(ROOT, 'dist-ssr')
 
-const SITE_URL = 'https://zak.is-a.dev'
+const SITE_URL = 'https://zakariyakhalid.com'
 const SITE_NAME = 'Zakariya Khalid'
 const DEFAULT_DESCRIPTION = 'Portfolio of Zakariya Khalid, a software engineer building things for the web.'
 
