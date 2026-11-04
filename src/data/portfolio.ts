@@ -45,7 +45,7 @@ export const profile = {
   name: 'Zakariya Khalid',
   role: 'Chief Operating Officer at Orca Systems',
   location: 'United Kingdom',
-  email: 'hello@zak.is-a.dev',
+  email: 'hello@zakariyakhalid.com',
   resumeUrl: '/resume.pdf',
 } as const
 
@@ -71,7 +71,7 @@ export const navLinks = [
 export const about = {
   heading: 'About',
   paragraphs: [
-    "I'm Zak, a developer based in the UK with a strong focus on web development and self-hosted infrastructure. I enjoy building clean, functional tools and exploring how systems work from the code up. ",
+    "I'm Zak, a developer based in the UK with a strong focus on web development and self-hosted infrastructure. I enjoy building clean, functional tools and exploring how systems work from the code up. I'm very interested in web design. ",
   ],
   facts: [
     { label: 'Based in', value: profile.location },
@@ -86,6 +86,17 @@ export const about = {
 }
 
 export const projects: Project[] = [
+  {
+    id: 'premiere-tui',
+    title: 'Premiere TUI',
+    summary: 'Scaffold Premiere Pro projects instantly.',
+    tech: ['Powershell 7'],
+    status: 'live',
+    links: [
+      { label: 'Live site', href: 'https://premiere-tui.zakariyakhalid.com', external: true },
+      { label: 'Source', href: 'https://github.com/zakagain/premiere-tui', external: true },
+    ],
+  },
   {
     id: 'config-journal',
     title: 'Config Journal',
@@ -131,7 +142,7 @@ export const projects: Project[] = [
 export const experience: Experience[] = [
   {
     role: 'Chief Operating Officer',
-    organisation: 'Orca Servers',
+    organisation: 'Orca Systems',
     link: {
       label: 'Orca Servers',
       href: 'https://orcaservers.com/?utm_source=zak.is-a.dev',
@@ -139,7 +150,7 @@ export const experience: Experience[] = [
     },
     start: '2026',
     summary:
-      'Early stages. Joined Orca Servers (https://orcaservers.com) as Chief Operating Officer.',
+      'Early stages. Joined Orca Systems (https://orcaservers.com) as Chief Operating Officer.',
   },
 ]
 
