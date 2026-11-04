@@ -1,12 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#3057e0" />
-  <text
-    x="32"
-    y="43"
-    font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
-    font-size="30"
-    font-weight="700"
-    fill="#ffffff"
-    text-anchor="middle"
-  >ZK</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2000" zoomAndPan="magnify" viewBox="0 0 1500 1499.999933" height="2000" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><g/></defs><rect x="-150" width="1800" fill="#ffffff" y="-149.999993" height="1799.99992" fill-opacity="1"/><rect x="-150" width="1800" fill="#222222" y="-149.999993" height="1799.99992" fill-opacity="1"/><g fill="#ffffff" fill-opacity="1"><g transform="translate(326.624859, 959.517145)"><g><path d="M 166.96875 -87.15625 L 363.28125 -87.15625 L 363.28125 0 L 32.109375 0 L 32.109375 -45.875 L 228.421875 -365.109375 L 228.421875 -368.78125 L 32.109375 -368.78125 L 32.109375 -455.015625 L 363.28125 -455.015625 L 363.28125 -413.734375 L 166.96875 -89.90625 Z M 166.96875 -87.15625 "/></g></g></g><g fill="#ffffff" fill-opacity="1"><g transform="translate(708.250086, 959.517145)"><g><path d="M 428.421875 -271.546875 L 428.421875 0 L 342.1875 0 L 342.1875 -185.3125 L 132.109375 -185.3125 L 132.109375 0 L 45.875 0 L 45.875 -642.15625 L 132.109375 -642.15625 L 132.109375 -271.546875 L 134.859375 -271.546875 L 299.0625 -455.015625 L 410.0625 -455.015625 L 249.53125 -274.296875 L 249.53125 -271.546875 Z M 428.421875 -271.546875 "/></g></g></g></svg>
